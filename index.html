@@ -109,13 +109,6 @@ img{max-width:100%;display:block}
 .lore cite{font-size:16px;color:var(--ink-3)}
 .lore img{width:min(380px,40%);height:auto;flex-shrink:0;opacity:.6;filter:grayscale(1) brightness(.6) sepia(1) hue-rotate(-40deg) saturate(3)}
 
-/* ca */
-.ca-box{position:relative;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px;padding:28px 32px;background:#0c0c0c}
-.ca-box .edge{position:absolute;inset:0;border:3px dashed var(--line-2);pointer-events:none}
-.ca-box code{font-family:var(--mono);font-size:clamp(14px,2vw,18px);color:var(--ink);word-break:break-all}
-.ca-box .btn{min-height:44px;padding:0 22px}
-.ca-box.copied .btn{color:var(--green);border-color:var(--green)}
-
 /* join */
 .join-box{position:relative;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:32px;padding:clamp(36px,5vw,64px) clamp(24px,5vw,72px);background:#0c0c0c}
 .join-box .edge{position:absolute;inset:0;border:3px solid var(--ink);pointer-events:none}
@@ -162,7 +155,6 @@ footer a:hover{color:var(--red)}
         <li><a href="#origin">&gt;origin</a></li>
         <li><a href="#day">&gt;a day</a></li>
         <li><a href="#lore">&gt;lore</a></li>
-        <li><a href="#ca">&gt;ca</a></li>
         <li><a href="#join" class="join">&gt;join</a></li>
       </ul>
     </nav>
@@ -268,21 +260,6 @@ footer a:hover{color:var(--red)}
     </div>
   </section>
 
-  <section id="ca" class="sec ca">
-    <div class="wrap">
-      <div class="sec-head">
-        <h2 class="marker">the bag</h2>
-        <span class="marker">contract address</span>
-      </div>
-      <div class="ca-box">
-        <span class="edge wob" aria-hidden="true"></span>
-        <code id="ca-address">0x024A0Ffb5FaC743b9B507Fd3f8F3f914013c123B</code>
-        <button class="btn btn-ghost" id="ca-copy" type="button">[COPY]</button>
-      </div>
-      <p style="margin-top:20px;font-size:14px;letter-spacing:1px"><a href="https://flywheel.cash/v2/token/0x024A0Ffb5FaC743b9B507Fd3f8F3f914013c123B" target="_blank" rel="noopener">view on flywheel &gt;</a></p>
-    </div>
-  </section>
-
   <section id="join" class="sec">
     <div class="wrap">
       <div class="join-box">
@@ -301,41 +278,8 @@ footer a:hover{color:var(--red)}
   <div class="wrap">
     <span>doomer, a wojak character</span>
     <span class="marker">not financial advice. obviously.</span>
-    <nav aria-label="Social"><a href="https://x.com/doomer_rh" target="_blank" rel="noopener">[X]</a></nav>
+    <nav aria-label="Social"><a href="https://x.com/doomer_flywheel" target="_blank" rel="noopener">[X]</a></nav>
   </div>
 </footer>
 
-<script>
-(function(){
-  var btn = document.getElementById('ca-copy');
-  var addr = document.getElementById('ca-address');
-  if (!btn || !addr) return;
-  btn.addEventListener('click', function(){
-    var text = addr.textContent;
-    var done = function(){
-      var box = btn.closest('.ca-box');
-      var prev = btn.textContent;
-      btn.textContent = '[COPIED]';
-      if (box) box.classList.add('copied');
-      setTimeout(function(){
-        btn.textContent = prev;
-        if (box) box.classList.remove('copied');
-      }, 1500);
-    };
-    var selectFallback = function(){
-      var range = document.createRange();
-      range.selectNodeContents(addr);
-      var sel = window.getSelection();
-      sel.removeAllRanges();
-      sel.addRange(range);
-      done();
-    };
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(text).then(done, selectFallback);
-    } else {
-      selectFallback();
-    }
-  });
-})();
-</script>
 </body></html>
